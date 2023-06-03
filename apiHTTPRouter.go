@@ -48,8 +48,8 @@ func HTTPAPIServer() {
 		public.LoadHTMLGlob(Storage.ServerHTTPDir() + "/templates/*")
 		public.GET("/", HTTPAPIServerIndex)
 		public.GET("/pages/stream/list", HTTPAPIStreamList)
-		public.GET("/pages/stream/add", HTTPAPIAddStream)
-		public.GET("/pages/stream/edit/:uuid", HTTPAPIEditStream)
+		//public.GET("/pages/stream/add", HTTPAPIAddStream)
+		//public.GET("/pages/stream/edit/:uuid", HTTPAPIEditStream)
 		public.GET("/pages/player/hls/:uuid/:channel", HTTPAPIPlayHls)
 		public.GET("/pages/player/mse/:uuid/:channel", HTTPAPIPlayMse)
 		public.GET("/pages/player/webrtc/:uuid/:channel", HTTPAPIPlayWebrtc)
@@ -65,9 +65,9 @@ func HTTPAPIServer() {
 	*/
 
 	privat.GET("/streams", HTTPAPIServerStreams)
-	privat.POST("/stream/:uuid/add", HTTPAPIServerStreamAdd)
-	privat.POST("/stream/:uuid/edit", HTTPAPIServerStreamEdit)
-	privat.GET("/stream/:uuid/delete", HTTPAPIServerStreamDelete)
+	//privat.POST("/stream/:uuid/add", HTTPAPIServerStreamAdd)
+	//privat.POST("/stream/:uuid/edit", HTTPAPIServerStreamEdit)
+	//privat.GET("/stream/:uuid/delete", HTTPAPIServerStreamDelete)
 	privat.GET("/stream/:uuid/reload", HTTPAPIServerStreamReload)
 	privat.GET("/stream/:uuid/info", HTTPAPIServerStreamInfo)
 
@@ -75,16 +75,16 @@ func HTTPAPIServer() {
 		Streams Multi Control elements
 	*/
 
-	privat.POST("/streams/multi/control/add", HTTPAPIServerStreamsMultiControlAdd)
-	privat.POST("/streams/multi/control/delete", HTTPAPIServerStreamsMultiControlDelete)
+	//privat.POST("/streams/multi/control/add", HTTPAPIServerStreamsMultiControlAdd)
+	//privat.POST("/streams/multi/control/delete", HTTPAPIServerStreamsMultiControlDelete)
 
 	/*
 		Stream Channel elements
 	*/
 
-	privat.POST("/stream/:uuid/channel/:channel/add", HTTPAPIServerStreamChannelAdd)
-	privat.POST("/stream/:uuid/channel/:channel/edit", HTTPAPIServerStreamChannelEdit)
-	privat.GET("/stream/:uuid/channel/:channel/delete", HTTPAPIServerStreamChannelDelete)
+	//privat.POST("/stream/:uuid/channel/:channel/add", HTTPAPIServerStreamChannelAdd)
+	//privat.POST("/stream/:uuid/channel/:channel/edit", HTTPAPIServerStreamChannelEdit)
+	//privat.GET("/stream/:uuid/channel/:channel/delete", HTTPAPIServerStreamChannelDelete)
 	privat.GET("/stream/:uuid/channel/:channel/codec", HTTPAPIServerStreamChannelCodec)
 	privat.GET("/stream/:uuid/channel/:channel/reload", HTTPAPIServerStreamChannelReload)
 	privat.GET("/stream/:uuid/channel/:channel/info", HTTPAPIServerStreamChannelInfo)
@@ -213,15 +213,15 @@ func HTTPAPIPlayWebrtc(c *gin.Context) {
 		"channel": c.Param("channel"),
 	})
 }
-func HTTPAPIAddStream(c *gin.Context) {
+/*func HTTPAPIAddStream(c *gin.Context) {
 	c.HTML(http.StatusOK, "add_stream.tmpl", gin.H{
 		"port":    Storage.ServerHTTPPort(),
 		"streams": Storage.Streams,
 		"version": time.Now().String(),
 		"page":    "add_stream",
 	})
-}
-func HTTPAPIEditStream(c *gin.Context) {
+}*/
+/*func HTTPAPIEditStream(c *gin.Context) {
 	c.HTML(http.StatusOK, "edit_stream.tmpl", gin.H{
 		"port":    Storage.ServerHTTPPort(),
 		"streams": Storage.Streams,
@@ -229,7 +229,7 @@ func HTTPAPIEditStream(c *gin.Context) {
 		"page":    "edit_stream",
 		"uuid":    c.Param("uuid"),
 	})
-}
+}*/
 
 func HTTPAPIMultiview(c *gin.Context) {
 	c.HTML(http.StatusOK, "multiview.tmpl", gin.H{
