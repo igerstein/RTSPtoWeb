@@ -52,6 +52,7 @@ func HTTPAPIServer() {
 		//public.GET("/pages/stream/edit/:uuid", HTTPAPIEditStream)
 		public.GET("/pages/player/hls/:uuid/:channel", HTTPAPIPlayHls)
 		public.GET("/pages/player/mse/:uuid/:channel", HTTPAPIPlayMse)
+		public.GET("/stream/mse/:uuid/:channel", HTTPAPIPlayMseOnly)
 		public.GET("/pages/player/webrtc/:uuid/:channel", HTTPAPIPlayWebrtc)
 		public.GET("/pages/multiview", HTTPAPIMultiview)
 		public.Any("/pages/multiview/full", HTTPAPIFullScreenMultiView)
@@ -202,6 +203,16 @@ func HTTPAPIPlayMse(c *gin.Context) {
 		"uuid":    c.Param("uuid"),
 		"channel": c.Param("channel"),
 	})
+}
+func HTTPAPIPlayMseOnly(c *gin.Context) {
+        c.HTML(http.StatusOK, "play_mse_only.tmpl", gin.H{
+                "port":    Storage.ServerHTTPPort(),
+                "streams": Storage.Streams,
+                "version": time.Now().String(),
+                "page":    "play_mse_only",
+                "uuid":    c.Param("uuid"),
+                "channel": c.Param("channel"),
+        })
 }
 func HTTPAPIPlayWebrtc(c *gin.Context) {
 	c.HTML(http.StatusOK, "play_webrtc.tmpl", gin.H{
