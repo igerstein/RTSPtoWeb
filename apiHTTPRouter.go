@@ -51,6 +51,8 @@ func HTTPAPIServer() {
 		//public.GET("/pages/stream/add", HTTPAPIAddStream)
 		//public.GET("/pages/stream/edit/:uuid", HTTPAPIEditStream)
 		public.GET("/pages/player/hls/:uuid/:channel", HTTPAPIPlayHls)
+		public.GET("/stream/hls/:uuid/:channel", HTTPAPIPlayHlsOnly)
+		public.GET("/stream/hlsll/:uuid/:channel", HTTPAPIPlayHlsllOnly)
 		public.GET("/pages/player/mse/:uuid/:channel", HTTPAPIPlayMse)
 		public.GET("/stream/mse/:uuid/:channel", HTTPAPIPlayMseOnly)
 		public.GET("/pages/player/webrtc/:uuid/:channel", HTTPAPIPlayWebrtc)
@@ -193,6 +195,26 @@ func HTTPAPIPlayHls(c *gin.Context) {
 		"uuid":    c.Param("uuid"),
 		"channel": c.Param("channel"),
 	})
+}
+func HTTPAPIPlayHlsOnly(c *gin.Context) {
+        c.HTML(http.StatusOK, "play_hls_only.tmpl", gin.H{
+                "port":    Storage.ServerHTTPPort(),
+                "streams": Storage.Streams,
+                "version": time.Now().String(),
+                "page":    "play_hls_only",
+                "uuid":    c.Param("uuid"),
+                "channel": c.Param("channel"),
+        })
+}
+func HTTPAPIPlayHlsllOnly(c *gin.Context) {
+        c.HTML(http.StatusOK, "play_hlsll_only.tmpl", gin.H{
+                "port":    Storage.ServerHTTPPort(),
+                "streams": Storage.Streams,
+                "version": time.Now().String(),
+                "page":    "play_hlsll_only",
+                "uuid":    c.Param("uuid"),
+                "channel": c.Param("channel"),
+        })
 }
 func HTTPAPIPlayMse(c *gin.Context) {
 	c.HTML(http.StatusOK, "play_mse.tmpl", gin.H{
