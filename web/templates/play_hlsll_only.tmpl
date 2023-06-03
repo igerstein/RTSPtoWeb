@@ -38,7 +38,8 @@
       let uuid=$('#uuid').val();
       let channel=$('#channel').val();
       let url ='/stream/' + uuid + '/channel/'+channel+'/hlsll/live/index.m3u8';
-      if ($("#videoPlayer")[0].canPlayType('application/vnd.apple.mpegurl')) {
+      let isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && navigator.userAgent.indexOf('CriOS') == -1 && navigator.userAgent.indexOf('FxiOS') == -1;
+      if (isSafari && $("#videoPlayer")[0].canPlayType('application/vnd.apple.mpegurl')) {
         $("#videoPlayer")[0].src = url;
         $("#videoPlayer")[0].load();
       } else if (Hls.isSupported()) {
